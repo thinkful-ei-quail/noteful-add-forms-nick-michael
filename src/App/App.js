@@ -8,8 +8,10 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import AddFolder from '../AddFolder/AddFolder';
 import AddNote from '../AddNote/AddNote';
 import ApiContext from '../ApiContext';
+import Note from '../Note/Note';
 import config from '../config';
 import './App.css';
+import NotefulError from '../NotefulError';
 
 class App extends Component {
     state = {
@@ -100,16 +102,21 @@ class App extends Component {
         };
         return (
             <ApiContext.Provider value={value}>
-                <div className="App">
-                    <nav className="App__nav">{this.renderNavRoutes()}</nav>
-                    <header className="App__header">
-                        <h1>
-                            <Link to="/">Noteful</Link>{' '}
-                            <FontAwesomeIcon icon="check-double" />
-                        </h1>
-                    </header>
-                    <main className="App__main">{this.renderMainRoutes()}</main>
-                </div>
+                    <div className="App">
+                        <NotefulError>
+                            <Note id="fsadf" name={9} />
+                            <nav className="App__nav">{this.renderNavRoutes()}</nav>
+                        </NotefulError>
+                        <header className="App__header">
+                            <h1>
+                                <Link to="/">Noteful</Link>{' '}
+                                <FontAwesomeIcon icon="check-double" />
+                            </h1>
+                        </header>
+                        <NotefulError>
+                            <main className="App__main">{this.renderMainRoutes()}</main>
+                        </NotefulError>
+                    </div>
             </ApiContext.Provider>
         );
     }

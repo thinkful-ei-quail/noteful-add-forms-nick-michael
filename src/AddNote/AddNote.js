@@ -9,7 +9,7 @@ export default class AddNote extends Component {
         this.state = {
             noteInput: {value:'', touched: false},
             noteContent: {value:'', touched: false},
-            folderId: {value: '', touched: false}
+            folderId: { value: '', touched: false}
         }
     }
 
@@ -92,7 +92,7 @@ export default class AddNote extends Component {
 
     validateFolderId() {
         const folderId = this.state.folderId.value;
-        if (folderId.length === 0) {
+        if (!folderId) {
             return 'Must select folder';
         }
     }
@@ -127,7 +127,7 @@ export default class AddNote extends Component {
                         this.validateNoteName() ||
                         this.validateNoteContent() ||
                         this.validateFolderId()
-                    }
+                      }
                 >
                     Add Note
                 </button>

@@ -104,7 +104,6 @@ class App extends Component {
             <ApiContext.Provider value={value}>
                     <div className="App">
                         <NotefulError>
-                            <Note id="fsadf" name={9} />
                             <nav className="App__nav">{this.renderNavRoutes()}</nav>
                         </NotefulError>
                         <header className="App__header">

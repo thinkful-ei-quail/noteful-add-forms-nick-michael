@@ -6,9 +6,6 @@ import ValidationError from '../ValidationError';
 export default class AddNote extends Component {
     constructor(props) {
         super(props);
-        // this.noteInput = React.createRef();
-        // this.noteContent = React.createRef();
-        // this.folderId = React.createRef();
         this.state = {
             noteInput: {value:'', touched: false},
             noteContent: {value:'', touched: false},
@@ -95,7 +92,7 @@ export default class AddNote extends Component {
 
     validateFolderId() {
         const folderId = this.state.folderId.value;
-        if (!folderId) {
+        if (folderId.length === 0) {
             return 'Must select folder';
         }
     }
@@ -130,7 +127,7 @@ export default class AddNote extends Component {
                         this.validateNoteName() ||
                         this.validateNoteContent() ||
                         this.validateFolderId()
-                      }
+                    }
                 >
                     Add Note
                 </button>

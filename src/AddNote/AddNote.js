@@ -15,10 +15,11 @@ export default class AddNote extends Component {
         event.preventDefault();
         const noteName = this.noteInput.current.value;
         const noteContent = this.noteContent.current.value;
-        // console.log(noteName);
-        console.log(noteContent);
         const note = {
             name: noteName,
+            folderId: ''
+            modified: '',
+            content: noteContent
         }
 
         fetch(`${config.API_ENDPOINT}/notes/`, {
@@ -36,10 +37,11 @@ export default class AddNote extends Component {
                 <h2>New Note</h2>
                 <label htmlFor="noteName">Note Name:</label>
                 <input type="text" name="noteName" id="noteName" ref={this.noteInput} />
+                <br />
                 <label htmlFor="noteContent">Note Content:</label>
-                <textarea name="noteContent" id="noteContent" ref={this.noteContent} />
+                <textarea name="noteContent" id="noteContent" rows="4" cols="50" ref={this.noteContent} />
                 <button type="submit">Add Note</button>
             </form>
         );
     }
-}
+} 

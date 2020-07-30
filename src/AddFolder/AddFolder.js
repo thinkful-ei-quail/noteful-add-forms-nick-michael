@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import ApiContext from '../ApiContext';
 import config from '../config'
+import ValidationError from '../ValidationError';
 
 export default class AddFolder extends Component {
     constructor(props) {
         super(props);
-        this.folderInput = React.createRef();
+        this.state = {
+            folderInput: {value:'', touched: false}
+        }
+        //this.folderInput = React.createRef();
     }
 
     static contextType = ApiContext;
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const folderName = this.folderInput.current.value;
-        console.log(folderName);
+        const {folderInput} = this.state;
+        console.log(folderInput);
 
-        const folder = { name: folderName }
+        const folder = { name: folderInput.value }
 
         fetch(`${config.API_ENDPOINT}/folders/`, {
             method: 'POST',
@@ -39,13 +43,29 @@ export default class AddFolder extends Component {
             })
     }
 
+    updateFolderName(folderName){
+        this.setState({folderInput:{value: folderName, touched: true}})
+    }
 
+    validateName() {
+        const folderName = this.state.folderInput.value.trim();
+        if (folderName.length === 0){
+            return 'Folder name is required';          
+        } else if (folderName.length < 3){
+            return 'Folder name must be at least 3 characters long';
+        }else if (folderName.length >= 12){
+            return 'Folder name must be less than 13 characters long';
+        }
+    }
+    
     render() {
+        const folderNameError = this.validateName();
         return (
             <form className="AddFolder" onSubmit={e => this.handleSubmit(e)}>
                 <h2>New Folder</h2>
                 <label htmlFor="folderName">Folder Name:</label>
-                <input type="text" name="folderName" id="folderName" ref={this.folderInput} />
+                <input type="text" name="folderName" id="folderName" onChange={e => this.updateFolderName(e.target.value)} />
+                {this.state.folderInput.touched && (<ValidationError message={folderNameError}/>)}
                 <button type="submit">Add Folder</button>
             </form>
         );

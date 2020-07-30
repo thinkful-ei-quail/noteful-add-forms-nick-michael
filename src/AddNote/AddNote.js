@@ -62,7 +62,7 @@ export default class AddNote extends Component {
                 <label htmlFor="noteContent">Note Content:</label>
                 <textarea name="noteContent" id="noteContent" rows="4" cols="50" ref={this.noteContent} />
                 <label htmlFor='folderName'>Choose Folder:</label>
-                
+
                 <select name='folderName' id='folderName' ref={this.folderId}>
                     {folders.map(folder =>
                         <option key={folder.id} value={folder.id}>{folder.name}</option>

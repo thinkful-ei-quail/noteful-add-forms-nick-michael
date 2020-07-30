@@ -15,10 +15,14 @@ export default class AddNote extends Component {
         event.preventDefault();
         const noteName = this.noteInput.current.value;
         const noteContent = this.noteContent.current.value;
+        const currentTime = new Date();
+        console.log('current time', currentTime);
+        const currentTimeISO = currentTime.toISOString();
+        console.log('current time ISO', currentTimeISO);
         const note = {
             name: noteName,
-            folderId: ''
-            modified: '',
+            folderId: '',
+            modified: currentTimeISO,
             content: noteContent
         }
 
